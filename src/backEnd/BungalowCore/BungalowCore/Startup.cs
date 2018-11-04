@@ -29,6 +29,12 @@ namespace BungalowCore
         {
             services.RegisterServices();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddCors(o => o.AddPolicy("AllowAll", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
 
             services.AddSwaggerGen(c =>
             {
@@ -54,6 +60,7 @@ namespace BungalowCore
             {
                 app.UseHsts();
             }
+            app.UseCors("AllowAll");
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {

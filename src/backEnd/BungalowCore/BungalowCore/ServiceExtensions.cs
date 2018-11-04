@@ -14,6 +14,7 @@ namespace Bungalow.Web.Host
             this IServiceCollection services)
         {
             services.AddTransient<IApartmentService, ApartmentService>();
+            services.AddSingleton<IBaseSingleService, BaseSingleService>();
             // Add all other services here.
             return services;
         }
