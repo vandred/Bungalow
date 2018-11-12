@@ -24,7 +24,6 @@ namespace Bungalow.Web.Host.Controllers
         [HttpPost("SetUpBaseFee")]
         public ActionResult<bool> SetUpBaseFee([FromBody] BaseFeeInput BaseFeeInput)
         {
-            float BaseFeeTest = _baseService.GetBaseDayFee();
             float BaseFee = BaseFeeInput.BaseFee;
             _baseService.SetBaseDayFee(BaseFee);
             return true;

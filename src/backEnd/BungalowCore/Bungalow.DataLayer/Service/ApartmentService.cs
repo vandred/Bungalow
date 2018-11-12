@@ -8,6 +8,11 @@ namespace Bungalow.DataLayer.Service
 {
     public class ApartmentService : IApartmentService
     {
+        public bool BookAppartment()
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Apartments> GetAllAppartments()
         {
             return new List<Apartments>

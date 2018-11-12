@@ -8,5 +8,7 @@ namespace Bungalow.DataLayer.Interface
     public interface IApartmentService
     {
         IEnumerable<Apartments> GetAllAppartments ();
+
+        bool BookAppartment();
     }
 }
