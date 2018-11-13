@@ -34,8 +34,23 @@ namespace Bungalow.Web.Host.Controllers
         public ActionResult<BookingOut> Book([FromBody] BookingInput input)
         {
             //  BookingInput booData = input;
+
+            var apartT = _dataService.GetAllAppartments().Where(x=>x.Id.ToString()==input.ApartmentId).First();
+
             BookingOut rzlt = new BookingOut();
             rzlt.ReservationNumber= Guid.NewGuid().ToString();
+
+            BookRecords newBook = new BookRecords();
+            newBook.FName = input.Fname;
+            newBook.lName = input.Lname;
+            newBook.Email = input.Email;
+            newBook.ReservationNumber = rzlt.ReservationNumber;
+            newBook.StartDate = input.StartDate;
+            newBook.AType = apartT;
+
+            var bookRecords = _baseService.SaveBook(newBook);
+
+
             return rzlt;
         }
 
@@ -51,8 +66,11 @@ namespace Bungalow.Web.Host.Controllers
         public ActionResult<CheckOutOutput> CheckOut([FromBody] CheckOutInput input)
         {
             CheckOutOutput rzlt = new CheckOutOutput();
-            rzlt.Price=2.59f;
-            CheckOutInput booData = input;
+            BookRecords bookEnt = _baseService.GetBook(input.ReservationNumber);
+            bookEnt.EndDate = input.CheakOutDate;
+
+            var testDays = (bookEnt.EndDate - bookEnt.StartDate).TotalDays;
+                rzlt.Price = (float)testDays * _baseService.GetBaseDayFee()* bookEnt.AType.Price;
 
             return rzlt;
         }

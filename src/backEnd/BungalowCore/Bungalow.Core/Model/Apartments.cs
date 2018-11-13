@@ -20,5 +20,6 @@ namespace Bungalow.Core.Model
         public string Email { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+        public float TotalPrice { get; set; }
     }
 }

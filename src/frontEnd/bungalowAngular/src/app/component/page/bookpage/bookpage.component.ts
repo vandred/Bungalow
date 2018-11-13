@@ -9,23 +9,6 @@ import { dateValidator } from './datevalidate';
   styleUrls: ['./bookpage.component.scss']
 })
 export class BookpageComponent implements OnInit {
-  testJsonBody = {
-    apartmentId: '2',
-    fname: 'asdasd',
-    lname: 'asdasd',
-    email: 'asdads@m',
-    personalNumber: 'asdasdad',
-    startDate: '2018-11-18'
-  };
-
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: 'my-auth-token'
-    })
-  };
-
-  isValid = false;
   reservationNumber = '';
 
   TypeAppartments: Array<any>;

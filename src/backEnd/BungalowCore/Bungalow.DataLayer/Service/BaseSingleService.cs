@@ -26,7 +26,7 @@ namespace Bungalow.DataLayer.Service
         public BookRecords GetBook(string registreId)
         {
             BookRecords rzlt = booList.Where(x => x.ReservationNumber == registreId).FirstOrDefault();
-            return new BookRecords();
+            return rzlt;
         }
 
         public List<BookRecords> SaveBook(BookRecords Input)
