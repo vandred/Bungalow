@@ -8,15 +8,20 @@ namespace Bungalow.Web.Host.ViewModel
 {
     public class BookingInput
     {
-        [Required(ErrorMessage = "Apartment Number is required.")]
-        public int ApartmentId { get; set; }
+        public string ApartmentId { get; set; }
         // type of appartment
-        [Required(ErrorMessage = "Type of apartment is required.")]
-        public int TypeA { get; set; }
-        public int PersonalNumber { get; set; }
-        [Required(ErrorMessage = "Date of Start is required.")]
+        public string Lname { get; set; }
+        public string Fname { get; set; }
+        public string Email { get; set; }
+        public string PersonalNumber { get; set; }
         public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+
+    }
+
+    public class BookingOut
+    {
+        public string ReservationNumber { get; set; }
+        // type of appartment
 
     }
 }

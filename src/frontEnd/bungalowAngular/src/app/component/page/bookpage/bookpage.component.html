@@ -1,83 +1,124 @@
-
 <div class="formclass">
-<form novalidate [formGroup]="bookForm" (ngSubmit)="onSubmit()">
-
+  <form novalidate [formGroup]="bookForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
-        <label for="exampleFormControlSelect1">Select Type Of Appartment</label>
-        <select class="form-control" id="exampleFormControlSelect1" formControlName="apartmentId">
-
-          <option *ngFor="let type of TypeAppartments"
-          [value]="type.aType" >{{type.name}}</option>
-
-        </select>
-        <small class="text-danger" *ngIf="apartmentId.invalid && apartmentId.dirty">
-            This field is requered
-          </small>
-      </div>
-
-  <div class="form-group" [ngClass]="{
-      'has-error': fname.invalid && fname.dirty,
-      'has-success': fname.valid && fname.dirty }">
-    <label>First Name</label>
-    <input type="text" class="form-control" formControlName="fname">
-    <small class="text-danger" *ngIf="fname.invalid && fname.dirty">
+      <label for="exampleFormControlSelect1">Select Type Of Appartment</label>
+      <select
+        class="form-control"
+        id="exampleFormControlSelect1"
+        formControlName="apartmentId"
+      >
+        <option *ngFor="let type of TypeAppartments" [value]="type.id">{{
+          type.name
+        }}</option>
+      </select>
+      <small
+        class="text-danger"
+        *ngIf="apartmentId.invalid && apartmentId.dirty"
+      >
         This field is requered
       </small>
-  </div>
-
-
-  <div class="form-group" [ngClass]="{
-      'has-error': lname.invalid && lname.dirty,
-      'has-success': lname.valid && lname.dirty }">
-    <label>Last Name</label>
-    <input type="text" class="form-control" formControlName="lname">
-    <small class="text-danger" *ngIf="lname.invalid && lname.dirty">
-        This field is requered
-      </small>
-  </div>
-
-  <div class="form-group" [ngClass]="{
-    'has-error': email.invalid && email.dirty,
-    'has-success': email.valid && email.dirty }">
-  <label>Email</label>
-  <input type="text" class="form-control" formControlName="email">
-
-  <div class="alert alert-danger" *ngIf="email.errors && (email.dirty || email.touched)">
-      <p *ngIf="email.errors.required"> This field is requered</p>
-      <p *ngIf="email.errors.pattern"> This field is incorect</p>
     </div>
-</div>
 
-  <div class="form-group" [ngClass]="{
-    'has-error': personalNumber.invalid && personalNumber.dirty,
-    'has-success': personalNumber.valid && personalNumber.dirty }">
-  <label>Personal Number</label>
-  <input type="text" class="form-control" formControlName="personalNumber">
-  <div class="alert alert-danger" *ngIf="personalNumber.errors && (personalNumber.dirty || personalNumber.touched)">
-    <p *ngIf="personalNumber.errors.required">This field is requered</p>
-    <p *ngIf="personalNumber.errors.minlength">Minimum length of field is {{personalNumber.errors.minlength.requiredLength}}</p>
-  </div>
-</div>
+    <div
+      class="form-group"
+      [ngClass]="{
+        'has-error': fname.invalid && fname.dirty,
+        'has-success': fname.valid && fname.dirty
+      }"
+    >
+      <label>First Name</label>
+      <input type="text" class="form-control" formControlName="fname" />
+      <small class="text-danger" *ngIf="fname.invalid && fname.dirty">
+        This field is requered
+      </small>
+    </div>
 
-<!-- <div class="form-group" [ngClass]="{
-  'has-error': personalNumber.invalid && personalNumber.dirty,
-  'has-success': personalNumber.valid && personalNumber.dirty }">
-<label>Reservation Number</label>
-<input type="text" class="form-control" formControlName="personalNumber">
-</div> -->
+    <div
+      class="form-group"
+      [ngClass]="{
+        'has-error': lname.invalid && lname.dirty,
+        'has-success': lname.valid && lname.dirty
+      }"
+    >
+      <label>Last Name</label>
+      <input type="text" class="form-control" formControlName="lname" />
+      <small class="text-danger" *ngIf="lname.invalid && lname.dirty">
+        This field is requered
+      </small>
+    </div>
 
-  <div class="form-group" [ngClass]="{
-      'has-error': startDate.invalid && startDate.dirty,
-      'has-success': startDate.valid && startDate.dirty }">
-    <label for="">Start Date</label>
-    <input type="date" class="form-control" formControlName="startDate">
-  </div>
-  <input type="submit" class="btn btn-default" [disabled]="bookForm.valid">
-</form>
+    <div
+      class="form-group"
+      [ngClass]="{
+        'has-error': email.invalid && email.dirty,
+        'has-success': email.valid && email.dirty
+      }"
+    >
+      <label>Email</label>
+      <input type="text" class="form-control" formControlName="email" />
+
+      <div
+        class="alert alert-danger"
+        *ngIf="email.errors && (email.dirty || email.touched)"
+      >
+        <p *ngIf="email.errors.required">This field is requered</p>
+        <p *ngIf="email.errors.pattern">This field is incorect</p>
+      </div>
+    </div>
+
+    <div
+      class="form-group"
+      [ngClass]="{
+        'has-error': personalNumber.invalid && personalNumber.dirty,
+        'has-success': personalNumber.valid && personalNumber.dirty
+      }"
+    >
+      <label>Personal Number</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="personalNumber"
+      />
+      <div
+        class="alert alert-danger"
+        *ngIf="
+          personalNumber.errors &&
+          (personalNumber.dirty || personalNumber.touched)
+        "
+      >
+        <p *ngIf="personalNumber.errors.required">This field is requered</p>
+        <p *ngIf="personalNumber.errors.minlength">
+          Minimum length of field is
+          {{ personalNumber.errors.minlength.requiredLength }}
+        </p>
+      </div>
+    </div>
+
+    <!--
+      <div class="form-group" [ngClass]="{
+        'has-error': personalNumber.invalid && personalNumber.dirty,
+        'has-success': personalNumber.valid && personalNumber.dirty }">
+      <label>Reservation Number</label>
+      <input type="text" class="form-control" formControlName="personalNumber">
+      </div>
+    -->
+
+    <div
+      class="form-group"
+      [ngClass]="{
+        'has-error': startDate.invalid && startDate.dirty,
+        'has-success': startDate.valid && startDate.dirty
+      }"
+    >
+      <label for="">Start Date</label>
+      <input type="date" class="form-control" formControlName="startDate" />
+    </div>
+    <input type="submit" class="btn btn-default" [disabled]="!bookForm.valid" />
+  </form>
 </div>
-<br>
+<br />
 <div class="alert alert-danger" *ngIf="!bookForm.valid">
   Booking form is invalid please check all is correct?
 </div>
 
-<pre>{{bookForm.value |json}}</pre>
+<pre>{{ bookForm.value | json }}</pre>

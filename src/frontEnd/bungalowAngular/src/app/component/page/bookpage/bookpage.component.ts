@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { dateValidator } from "./datevalidate";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { dateValidator } from './datevalidate';
 
 @Component({
   selector: 'app-bookpage',
@@ -9,14 +9,26 @@ import { dateValidator } from "./datevalidate";
   styleUrls: ['./bookpage.component.scss']
 })
 export class BookpageComponent implements OnInit {
+  testJsonBody = {
+    apartmentId: '2',
+    fname: 'asdasd',
+    lname: 'asdasd',
+    email: 'asdads@m',
+    personalNumber: 'asdasdad',
+    startDate: '2018-11-18'
+  };
+
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'my-auth-token'
+    })
+  };
 
   isValid = false;
   reservationNumber = '';
 
-
   TypeAppartments: Array<any>;
-
-
 
   bookForm: FormGroup;
 
@@ -26,7 +38,6 @@ export class BookpageComponent implements OnInit {
   email: FormControl;
   personalNumber: FormControl;
   startDate: FormControl;
-
 
   constructor(private _http: HttpClient) {
     this.getAppartments();
@@ -38,18 +49,18 @@ export class BookpageComponent implements OnInit {
   }
 
   createFormControls() {
-    this.apartmentId = new FormControl('', Validators.required);
+    this.apartmentId = new FormControl(0, Validators.required);
     this.fname = new FormControl('', Validators.required);
     this.lname = new FormControl('', Validators.required);
     this.email = new FormControl('', [
       Validators.required,
-      Validators.pattern("[^ @]*@[^ @]*")
+      Validators.pattern('[^ @]*@[^ @]*')
     ]);
     this.personalNumber = new FormControl('', [
       Validators.minLength(8),
       Validators.required
     ]);
-   // this.reservationNumber = new FormControl('', Validators.required);
+    // this.reservationNumber = new FormControl('', Validators.required);
     this.startDate = new FormControl(new Date(), [dateValidator]);
   }
 
@@ -61,20 +72,18 @@ export class BookpageComponent implements OnInit {
       email: this.email,
       personalNumber: this.personalNumber,
       // reservationNumber: this.reservationNumber,
-      startDate: this.startDate,
+      startDate: this.startDate
     });
   }
 
   onSubmit() {
-    console.log('this.bookForm.value', this.bookForm.value);
-
     if (this.bookForm.valid) {
       console.log('form is valid so send data');
       this._http
-      .post('https://localhost:44307/api/Booking', this.bookForm.value)
-      .subscribe(x => {
-        console.log('result', x);
-      });
+        .post('https://localhost:44307/api/Booking/Book', this.bookForm.value)
+        .subscribe((x: string) => {
+          console.log('POST result', x);
+        });
     }
   }
 
@@ -85,8 +94,5 @@ export class BookpageComponent implements OnInit {
         console.log('result', x);
         this.TypeAppartments = x;
       });
-
   }
-
-
 }

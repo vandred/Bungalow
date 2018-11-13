@@ -9,12 +9,12 @@ import { dateValidator } from '../bookpage/datevalidate';
   styleUrls: ['./check-out.component.scss']
 })
 export class CheckOutComponent implements OnInit {
+  totalSum = 0;
 
   cheakOutForm: FormGroup;
 
   reservationNumber: FormControl;
   cheakOutDate: FormControl;
-
 
   constructor(private _http: HttpClient) {}
 
@@ -23,19 +23,21 @@ export class CheckOutComponent implements OnInit {
     this.createForm();
   }
 
-
   createFormControls() {
     this.reservationNumber = new FormControl('', [
-     Validators.required,
+      Validators.required,
       Validators.minLength(8)
     ]);
-    this.cheakOutDate = new FormControl(new Date(), [Validators.required, dateValidator]);
+    this.cheakOutDate = new FormControl(new Date(), [
+      Validators.required,
+      dateValidator
+    ]);
   }
 
   createForm() {
     this.cheakOutForm = new FormGroup({
       reservationNumber: this.reservationNumber,
-      cheakOutDate: this.cheakOutDate,
+      cheakOutDate: this.cheakOutDate
     });
   }
 
@@ -43,7 +45,14 @@ export class CheckOutComponent implements OnInit {
     console.log('this.cheakOutForm.value', this.cheakOutForm.value);
 
     if (this.cheakOutForm.valid) {
-
+      this._http
+        .post(
+          'https://localhost:44307/api/Booking/CheckOut',
+          this.cheakOutForm.value
+        )
+        .subscribe((x: string) => {
+          console.log('POST result', x);
+        });
     }
   }
 }

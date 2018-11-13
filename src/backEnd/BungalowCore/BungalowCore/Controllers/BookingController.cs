@@ -31,10 +31,12 @@ namespace Bungalow.Web.Host.Controllers
 
 
         [HttpPost("Book")]
-        public ActionResult<string> Book([FromBody] BookingInput input)
+        public ActionResult<BookingOut> Book([FromBody] BookingInput input)
         {
-            BookingInput booData = input;
-            return new Guid().ToString();
+            //  BookingInput booData = input;
+            BookingOut rzlt = new BookingOut();
+            rzlt.ReservationNumber= Guid.NewGuid().ToString();
+            return rzlt;
         }
 
         [HttpGet("GetAppartmentType")]
@@ -46,10 +48,12 @@ namespace Bungalow.Web.Host.Controllers
 
 
         [HttpPost("CheckOut")]
-        public ActionResult<float> CheckOut([FromBody] CheckOutInput input)
+        public ActionResult<CheckOutOutput> CheckOut([FromBody] CheckOutInput input)
         {
-            float rzlt = 0.0f;
+            CheckOutOutput rzlt = new CheckOutOutput();
+            rzlt.Price=2.59f;
             CheckOutInput booData = input;
+
             return rzlt;
         }
 

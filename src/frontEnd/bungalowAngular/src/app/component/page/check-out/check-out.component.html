@@ -1,37 +1,56 @@
-
 <div class="formclass">
   <h1>Cheak Out Form</h1>
 
   <form novalidate [formGroup]="cheakOutForm" (ngSubmit)="onSubmit()">
-
-
-    <div class="form-group" [ngClass]="{
-      'has-error': reservationNumber.invalid && reservationNumber.dirty,
-      'has-success': reservationNumber.valid && reservationNumber.dirty }">
-    <label>Reservatio Number</label>
-    <input type="text" class="form-control" formControlName="reservationNumber">
-    <div class="alert alert-danger" *ngIf="reservationNumber.errors && (reservationNumber.dirty || reservationNumber.touched)">
-      <p *ngIf="reservationNumber.errors.required">This field is requered</p>
-      <p *ngIf="reservationNumber.errors.minlength">Minimum length of field is {{reservationNumber.errors.minlength.requiredLength}}</p>
+    <div
+      class="form-group"
+      [ngClass]="{
+        'has-error': reservationNumber.invalid && reservationNumber.dirty,
+        'has-success': reservationNumber.valid && reservationNumber.dirty
+      }"
+    >
+      <label>Reservatio Number</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="reservationNumber"
+      />
+      <div
+        class="alert alert-danger"
+        *ngIf="
+          reservationNumber.errors &&
+          (reservationNumber.dirty || reservationNumber.touched)
+        "
+      >
+        <p *ngIf="reservationNumber.errors.required">This field is requered</p>
+        <p *ngIf="reservationNumber.errors.minlength">
+          Minimum length of field is
+          {{ reservationNumber.errors.minlength.requiredLength }}
+        </p>
+      </div>
     </div>
-  </div>
 
-
-
-    <div class="form-group" [ngClass]="{
+    <div
+      class="form-group"
+      [ngClass]="{
         'has-error': cheakOutDate.invalid && cheakOutDate.dirty,
-        'has-success': cheakOutDate.valid && cheakOutDate.dirty }">
+        'has-success': cheakOutDate.valid && cheakOutDate.dirty
+      }"
+    >
       <label for="">Start Date</label>
-      <input type="date" class="form-control" formControlName="cheakOutDate">
+      <input type="date" class="form-control" formControlName="cheakOutDate" />
     </div>
 
-
-    <input type="submit" class="btn btn-default" [disabled]="cheakOutForm.valid">
+    <input
+      type="submit"
+      class="btn btn-default"
+      [disabled]="!cheakOutForm.valid"
+    />
   </form>
-  </div>
-  <br>
-  <div class="alert alert-danger" *ngIf="!cheakOutForm.valid">
-    Booking form is invalid please check all is correct?
-  </div>
+</div>
+<br />
+<div class="alert alert-danger" *ngIf="!cheakOutForm.valid">
+  Booking form is invalid please check all is correct?
+</div>
 
-  <pre>{{cheakOutForm.value |json}}</pre>
+<pre>{{ cheakOutForm.value | json }}</pre>
