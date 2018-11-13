@@ -11,6 +11,9 @@ import { dateValidator } from "./datevalidate";
 export class BookpageComponent implements OnInit {
 
   isValid = false;
+  reservationNumber = '';
+
+
   TypeAppartments: Array<any>;
 
 
@@ -20,9 +23,10 @@ export class BookpageComponent implements OnInit {
   apartmentId: FormControl;
   fname: FormControl;
   lname: FormControl;
+  email: FormControl;
   personalNumber: FormControl;
   startDate: FormControl;
-  email: FormControl;
+
 
   constructor(private _http: HttpClient) {
     this.getAppartments();
@@ -41,7 +45,11 @@ export class BookpageComponent implements OnInit {
       Validators.required,
       Validators.pattern("[^ @]*@[^ @]*")
     ]);
-    this.personalNumber = new FormControl();
+    this.personalNumber = new FormControl('', [
+      Validators.minLength(8),
+      Validators.required
+    ]);
+   // this.reservationNumber = new FormControl('', Validators.required);
     this.startDate = new FormControl(new Date(), [dateValidator]);
   }
 
@@ -52,6 +60,7 @@ export class BookpageComponent implements OnInit {
       lname: this.lname,
       email: this.email,
       personalNumber: this.personalNumber,
+      // reservationNumber: this.reservationNumber,
       startDate: this.startDate,
     });
   }
@@ -59,11 +68,14 @@ export class BookpageComponent implements OnInit {
   onSubmit() {
     console.log('this.bookForm.value', this.bookForm.value);
 
-    this._http
+    if (this.bookForm.valid) {
+      console.log('form is valid so send data');
+      this._http
       .post('https://localhost:44307/api/Booking', this.bookForm.value)
       .subscribe(x => {
         console.log('result', x);
       });
+    }
   }
 
   getAppartments() {

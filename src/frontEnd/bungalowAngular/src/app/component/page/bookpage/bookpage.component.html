@@ -53,7 +53,18 @@
     'has-success': personalNumber.valid && personalNumber.dirty }">
   <label>Personal Number</label>
   <input type="text" class="form-control" formControlName="personalNumber">
+  <div class="alert alert-danger" *ngIf="personalNumber.errors && (personalNumber.dirty || personalNumber.touched)">
+    <p *ngIf="personalNumber.errors.required">This field is requered</p>
+    <p *ngIf="personalNumber.errors.minlength">Minimum length of field is {{personalNumber.errors.minlength.requiredLength}}</p>
+  </div>
 </div>
+
+<!-- <div class="form-group" [ngClass]="{
+  'has-error': personalNumber.invalid && personalNumber.dirty,
+  'has-success': personalNumber.valid && personalNumber.dirty }">
+<label>Reservation Number</label>
+<input type="text" class="form-control" formControlName="personalNumber">
+</div> -->
 
   <div class="form-group" [ngClass]="{
       'has-error': startDate.invalid && startDate.dirty,
@@ -61,9 +72,12 @@
     <label for="">Start Date</label>
     <input type="date" class="form-control" formControlName="startDate">
   </div>
-  <input type="submit" class="btn btn-default" [disabled]="isValid">
+  <input type="submit" class="btn btn-default" [disabled]="bookForm.valid">
 </form>
 </div>
 <br>
+<div class="alert alert-danger" *ngIf="!bookForm.valid">
+  Booking form is invalid please check all is correct?
+</div>
 
 <pre>{{bookForm.value |json}}</pre>
