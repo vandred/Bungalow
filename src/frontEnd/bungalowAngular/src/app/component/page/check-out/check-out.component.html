@@ -1,6 +1,5 @@
 <div class="formclass">
   <h1>Cheak Out Form</h1>
-
   <form novalidate [formGroup]="cheakOutForm" (ngSubmit)="onSubmit()">
     <div
       class="form-group"
@@ -52,5 +51,7 @@
 <div class="alert alert-danger" *ngIf="!cheakOutForm.valid">
   Booking form is invalid please check all is correct?
 </div>
+
+<div class="alert alert-danger" *ngIf="totalSum">{{ totalSum }}</div>
 
 <pre>{{ cheakOutForm.value | json }}</pre>

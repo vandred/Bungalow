@@ -67,10 +67,16 @@ namespace Bungalow.Web.Host.Controllers
         {
             CheckOutOutput rzlt = new CheckOutOutput();
             BookRecords bookEnt = _baseService.GetBook(input.ReservationNumber);
-            bookEnt.EndDate = input.CheakOutDate;
-
+            if (bookEnt!=null)
+            {
+                bookEnt.EndDate = input.CheakOutDate;
             var testDays = (bookEnt.EndDate - bookEnt.StartDate).TotalDays;
                 rzlt.Price = (float)testDays * _baseService.GetBaseDayFee()* bookEnt.AType.Price;
+            }
+            else
+            {
+                rzlt = null;
+            }
 
             return rzlt;
         }

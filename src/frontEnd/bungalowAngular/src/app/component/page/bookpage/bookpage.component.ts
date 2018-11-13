@@ -9,7 +9,7 @@ import { dateValidator } from './datevalidate';
   styleUrls: ['./bookpage.component.scss']
 })
 export class BookpageComponent implements OnInit {
-  reservationNumber = '';
+  reservationNumber: any;
 
   TypeAppartments: Array<any>;
 
@@ -66,6 +66,7 @@ export class BookpageComponent implements OnInit {
         .post('https://localhost:44307/api/Booking/Book', this.bookForm.value)
         .subscribe((x: string) => {
           console.log('POST result', x);
+          this.reservationNumber = x;
         });
     }
   }

@@ -9,7 +9,7 @@ import { dateValidator } from '../bookpage/datevalidate';
   styleUrls: ['./check-out.component.scss']
 })
 export class CheckOutComponent implements OnInit {
-  totalSum = 0;
+  totalSum = '';
 
   cheakOutForm: FormGroup;
 
@@ -50,8 +50,15 @@ export class CheckOutComponent implements OnInit {
           'https://localhost:44307/api/Booking/CheckOut',
           this.cheakOutForm.value
         )
-        .subscribe((x: string) => {
-          console.log('POST result', x);
+        .subscribe((x: any) => {
+          console.log('check out respons', x);
+          if (x != null) {
+            this.totalSum = x.price;
+            console.log('POST result', x);
+          } else {
+            this.totalSum =
+              'There is no such reservation plese check you Reservation number';
+          }
         });
     }
   }

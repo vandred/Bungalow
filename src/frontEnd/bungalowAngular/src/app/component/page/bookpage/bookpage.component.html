@@ -120,5 +120,8 @@
 <div class="alert alert-danger" *ngIf="!bookForm.valid">
   Booking form is invalid please check all is correct?
 </div>
+<div class="alert alert-info" *ngIf="reservationNumber">
+  Your reservation number id: {{ reservationNumber.reservationNumber }}
+</div>
 
 <pre>{{ bookForm.value | json }}</pre>
