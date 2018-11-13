@@ -29,7 +29,7 @@ export class CheckOutComponent implements OnInit {
      Validators.required,
       Validators.minLength(8)
     ]);
-    this.cheakOutDate = new FormControl(new Date(), [Validators.required]);
+    this.cheakOutDate = new FormControl(new Date(), [Validators.required, dateValidator]);
   }
 
   createForm() {
